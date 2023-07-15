@@ -127,7 +127,8 @@
 					alert("Presionaste la fecha: " + informacion.dateStr);
 
 					modalEvento.show();
-				}
+				},
+				events:"api.php"  // url del archivo de la consulta de BD
 			});
 			calendar.render();
 		});
