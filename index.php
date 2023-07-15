@@ -46,7 +46,41 @@
 					<div class="modal-body">
 
 						<div class="container-fluid">
-							Sin cargos
+
+							<form action="" method="post">
+
+								<div class="mb-3">
+									<label for="id" class="form-label">ID:</label>
+									<input type="hidden" class="form-control" name="id" id="id" aria-describedby="helpId" placeholder="ID">
+								</div>
+
+								<div class="mb-3">
+									<label for="titulo" class="form-label">Titulo:</label>
+									<input type="text" class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Titulo">
+								</div>
+
+								<div class="mb-3">
+									<label for="fecha" class="form-label">Fecha:</label>
+									<input type="date" class="form-control" name="fecha" id="fecha" aria-describedby="helpId" placeholder="Fecha">
+								</div>
+
+								<div class="mb-3">
+									<label for="hora" class="form-label">Hora del Evento:</label>
+									<input type="time" class="form-control" name="hora" id="hora" aria-describedby="helpId" placeholder="Hora">
+								</div>
+
+								<div class="mb-3">
+									<label for="descripcion" class="form-label">Descripcion:</label>
+									<textarea class="form-control" name="descripcion" id="descripcion" rows="3"></textarea>
+								</div>
+
+								<div class="mb-3">
+									<label for="color" class="form-label">Color:</label>
+									<input type="color" class="form-control" name="color" id="color" aria-describedby="helpId" placeholder="Titulo">
+								</div>
+
+							</form>
+
 						</div>
 
 					</div>
