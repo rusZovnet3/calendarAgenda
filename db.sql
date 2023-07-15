@@ -3,14 +3,14 @@ USE `f_agenda`;
 
 CREATE TABLE tblEventos(
 	id int primary key auto_increment,
-	titulo varchar(255),
+	title varchar(255),
 	descripcion text,
 	color varchar(255),
-	finicio datetime,
-	ffinal datetime
+	start datetime,
+	end datetime
 );
 
-insert into tblEventos(titulo,descripcion,color,finicio,ffinal)
+insert into tblEventos(title,descripcion,color,start,end)
 	values 	('Evento 1','cumple de ericka cordova','#3A2FC5','2023-07-08 08:00:00','2023-07-08 17:00:12'),
 			('Evento 2','cumple de wendy cordova','#3A2FC5','2023-07-10 07:55:00','2023-07-10 21:10:05'),
 			('Aniversario 1','Fecha Civica de La Paz','#2DDCF1','2023-07-16 06:00:00','2023-07-16 15:30:00'),

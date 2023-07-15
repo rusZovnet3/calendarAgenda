@@ -47,11 +47,11 @@
 
 						<div class="container-fluid">
 
-							<form action="" method="post">
+							<form action="" method="post" autocomplete="off">
 
 								<div class="mb-3">
 									<label for="id" class="form-label">ID:</label>
-									<input type="hidden" class="form-control" name="id" id="id" aria-describedby="helpId" placeholder="ID">
+									<input type="text" class="form-control" name="id" id="id" aria-describedby="helpId" placeholder="ID">
 								</div>
 
 								<div class="mb-3">
@@ -87,8 +87,8 @@
 
 					<div class="modal-footer">
 
-						<button type="button" class="btn btn-danger" id="btnBorrar" data-bs-dismiss="modal">Borrar</button>
-						<button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
+						<button type="button" class="btn btn-secondary" id="btnBorrar" data-bs-dismiss="modal">Borrar</button>
+						<button type="button" id="btnGuardar" onclick="agregarEvento()" class="btn btn-primary">Guardar</button>
 
 					</div>
 
@@ -132,6 +132,22 @@
 			});
 			calendar.render();
 		});
+
+
+		function agregarEvento(){
+			let evento = new FormData();
+			evento.append("title", document.getElementById('titulo').value);
+			evento.append("fecha", document.getElementById('fecha').value);
+			evento.append("hora", document.getElementById('hora').value);
+			evento.append("descripcion", document.getElementById('descripcion').value);
+			evento.append("color", document.getElementById('color').value);
+			evento.append("id", document.getElementById('id').value);
+
+			/*console.log(evento.get("title"))*/
+			for (let valor of evento.values()) {
+				console.log(valor);
+			};
+		}
 	</script>
 
 
