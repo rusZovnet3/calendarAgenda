@@ -4,11 +4,24 @@ header("Content-Type: application/json");
 
 # conexion a la BD
 $pdo = new PDO("mysql:host=localhost;dbname=f_agenda", "root", "localhost");
-$sentenciaSQL = $pdo->prepare("SELECT * FROM tblEventos");
-$sentenciaSQL->execute();
 
-$resultado = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+$accion = (isset($_GET['accion'])) ? $_GET['accion'] : 'leer';
 
-print_r(json_encode($resultado));
+switch ($accion) {
+	case 'leer':  // muestra la lista bd en lectura
+		$sentenciaSQL = $pdo->prepare("SELECT * FROM tblEventos");
+		$sentenciaSQL->execute();
 
-print_r($_POST);
+		$resultado = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+
+		print_r(json_encode($resultado));
+		break;
+
+	case 'agregar':  // muestra el envio de todo los post cargado del form
+		print_r($_POST);  // insertar evento
+		break;
+}
+
+
+
+
