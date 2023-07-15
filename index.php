@@ -15,14 +15,26 @@
 
 </head>
 <body>
-	<div id="calendar"></div>
+
+	<div class="container">
+		<div class="col-md-8 offset-md-2">
+			<div id="calendar"></div>
+		</div>
+	</div>
+
 
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function(){
 			var calendarEl = document.getElementById('calendar');
 			var calendar = new FullCalendar.Calendar(calendarEl, {
-				initialView: 'dayGridMonth'
+				initialView: 'dayGridMonth',
+				locale: 'es',  // traducir a español
+				headerToolbar: { // cabecera
+					left: 'prev,next today',
+					center: 'title',
+					right: 'dayGridMonth,timeGridWeek,timeGridDay'  // mes,dia,semana === por tiempo
+				}
 			});
 			calendar.render();
 		});
