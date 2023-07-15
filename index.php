@@ -146,7 +146,17 @@
 			/*console.log(evento.get("title"))*/
 			for (let valor of evento.values()) {
 				console.log(valor);
-			};
+			}
+
+			// recepcion de valores
+			fetch("api.php?accion=agregar", {
+				method: "POST",
+				body: evento
+			}).then(data => {
+				console.log(data);
+			}).catch(error => {
+				console.log(error);
+			});
 		}
 	</script>
 
