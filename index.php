@@ -135,7 +135,7 @@
 
 
 		function agregarEvento(){
-			let evento = new FormData();
+			let evento = new FormData();  /*POST de carga*/
 			evento.append("title", document.getElementById('titulo').value);
 			evento.append("fecha", document.getElementById('fecha').value);
 			evento.append("hora", document.getElementById('hora').value);
