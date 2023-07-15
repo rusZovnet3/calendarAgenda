@@ -69,8 +69,15 @@
 	</div>
 
 
+	<!-- Lib JS -->
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
 	<script>
+		var modalEvento;
+		// referencia al modal
+		modalEvento = new bootstrap.Modal(document.getElementById('modalEvento'),{ keyboard:false });
+
 		document.addEventListener('DOMContentLoaded', function(){
 			var calendarEl = document.getElementById('calendar');
 			var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -84,14 +91,14 @@
 				// captura la fecha, al hacer click el dia del mes
 				dateClick:function(informacion){
 					alert("Presionaste la fecha: " + informacion.dateStr);
+
+					modalEvento.show();
 				}
 			});
 			calendar.render();
 		});
 	</script>
 
-	<!-- Lib JS -->
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
