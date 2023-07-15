@@ -61,7 +61,7 @@
 
 								<div class="mb-3">
 									<label for="fecha" class="form-label">Fecha:</label>
-									<input type="date" class="form-control" name="fecha" id="fecha" aria-describedby="helpId" placeholder="Fecha">
+									<input type="date" class="form-control" name="fecha" id="fecha" aria-describedby="helpId" placeholder="Fecha" disabled="">
 								</div>
 
 								<div class="mb-3">
@@ -124,7 +124,10 @@
 				},
 				// captura la fecha, al hacer click el dia del mes
 				dateClick:function(informacion){
-					alert("Presionaste la fecha: " + informacion.dateStr);
+
+					limpiarFormulario(informacion.dateStr);
+
+					/*alert("Presionaste la fecha: " + informacion.dateStr);*/
 
 					modalEvento.show();
 				},
@@ -157,6 +160,16 @@
 			}).catch(error => {
 				console.log(error);
 			});
+		}
+
+
+		function limpiarFormulario(fecha){
+			document.getElementById('titulo').value = "";
+			document.getElementById('fecha').value = fecha;
+			document.getElementById('hora').value = "00:00";
+			document.getElementById('descripcion').value = "";
+			document.getElementById('color').value = "";
+			document.getElementById('id').value = "";
 		}
 	</script>
 
