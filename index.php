@@ -49,7 +49,7 @@
 
 							<form action="" method="post" autocomplete="off">
 
-								<div class="mb-3">
+								<div class="mb-3 visually-hidden">
 									<label for="id" class="form-label">ID:</label>
 									<input type="text" class="form-control" name="id" id="id" aria-describedby="helpId" placeholder="ID">
 								</div>
@@ -59,7 +59,7 @@
 									<input type="text" class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Titulo">
 								</div>
 
-								<div class="mb-3">
+								<div class="mb-3 visually-hidden">
 									<label for="fecha" class="form-label">Fecha:</label>
 									<input type="date" class="form-control" name="fecha" id="fecha" aria-describedby="helpId" placeholder="Fecha" disabled="">
 								</div>
@@ -146,6 +146,7 @@
 
 
 		function recuperarDatosEvento(evento){
+			limpiarErrores();
 
 			let fecha = evento.startStr.split("T");
 			let hora = fecha[1].split("-");
@@ -156,6 +157,10 @@
 			document.getElementById('hora').value = hora[0];
 			document.getElementById('descripcion').value = evento.extendedProps.descripcion;
 			document.getElementById('color').value = evento.backgroundColor;
+
+			/*desactivar botones*/
+			document.getElementById('btnBorrar').removeAttribute('disabled', "");
+			document.getElementById('btnGuardar').removeAttribute('disabled', "");
 		}
 
 		function borrarEvento(){
@@ -163,6 +168,12 @@
 		}
 
 		function agregarEvento(){
+			// verifica si el campo titulo está vacio
+			if (document.getElementById('titulo').value == "") {
+				 document.getElementById('titulo').classList.add('is-invalid');
+				 return true;
+			}
+
 			accion = (document.getElementById('id').value == 0) ? "agregar" : "actualizar";
 			enviarDatosApi(accion);
 		}
@@ -197,12 +208,22 @@
 
 
 		function limpiarFormulario(fecha){
+			limpiarErrores();
+
 			document.getElementById('titulo').value = "";
 			document.getElementById('fecha').value = fecha;
 			document.getElementById('hora').value = "00:00";
 			document.getElementById('descripcion').value = "";
 			document.getElementById('color').value = "";
 			document.getElementById('id').value = "";
+
+			/*desactivar boton*/
+			document.getElementById('btnBorrar').setAttribute('disabled', "disabled");
+		}
+
+		// inhabilita el campo error
+		function limpiarErrores(){
+			document.getElementById('titulo').classList.remove('is-invalid');
 		}
 	</script>
 
