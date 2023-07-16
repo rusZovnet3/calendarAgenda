@@ -31,6 +31,29 @@ switch ($accion) {
 
 		print_r($_POST);  // insertar evento
 		break;
+
+	case 'borrar':
+		$sentenciaSQL = $pdo->prepare("DELETE FROM tbleventos WHERE id = :id");
+		$sentenciaSQL->execute( array(
+			"id"	=> $_POST['id']
+		));
+		print_r($_POST);
+		break;
+
+	case 'actualizar':
+		$sentenciaSQL = $pdo->prepare("UPDATE tbleventos SET `title` = :title,`descripcion` = :descripcion,`color` = :color,`start` = :start,`end` = :end WHERE id = :id");
+
+		$sentenciaSQL->execute( array(
+			"title" 		=> $_POST['title'],
+			"descripcion" 	=> $_POST['descripcion'],
+			"color" 		=> $_POST['color'],
+			"start" 		=> $_POST['fecha']. " ". $_POST['hora'],
+			"end" 			=> $_POST['fecha']. " ". $_POST['hora'],
+			"id"			=> $_POST['id']
+		));
+
+		print_r($_POST);
+		break;
 }
 
 

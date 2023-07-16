@@ -87,7 +87,7 @@
 
 					<div class="modal-footer">
 
-						<button type="button" class="btn btn-secondary" id="btnBorrar" data-bs-dismiss="modal">Borrar</button>
+						<button type="button" class="btn btn-danger" id="btnBorrar" onclick="borrarEvento()" data-bs-dismiss="modal">Borrar</button>
 						<button type="button" id="btnGuardar" onclick="agregarEvento()" class="btn btn-primary">Guardar</button>
 
 					</div>
@@ -111,10 +111,11 @@
 		var modalEvento;
 		// referencia al modal
 		modalEvento = new bootstrap.Modal(document.getElementById('modalEvento'),{ keyboard:false });
+		var calendar;
 
 		document.addEventListener('DOMContentLoaded', function(){
 			var calendarEl = document.getElementById('calendar');
-			var calendar = new FullCalendar.Calendar(calendarEl, {
+			calendar = new FullCalendar.Calendar(calendarEl, {
 				initialView: 'dayGridMonth',
 				locale: 'es',  // traducir a español
 				headerToolbar: { // cabecera
@@ -157,18 +158,24 @@
 			document.getElementById('color').value = evento.backgroundColor;
 		}
 
+		function borrarEvento(){
+			enviarDatosApi("borrar");
+		}
+
 		function agregarEvento(){
-			enviarDatosApi();
+			accion = (document.getElementById('id').value == 0) ? "agregar" : "actualizar";
+			enviarDatosApi(accion);
 		}
 
 
-		function enviarDatosApi(){
+		function enviarDatosApi(accion){
 			// recepcion de valores
-			fetch("api.php?accion=agregar", {
+			fetch("api.php?accion=" + accion, {
 				method: "POST",
 				body: recolectarDatos()
 			}).then(data => {
 				console.log(data); // captura los datos del POST
+				calendar.refetchEvents();   // refresca
 				modalEvento.hide();  // cierra el modal
 			}).catch(error => {
 				console.log(error);
