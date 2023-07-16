@@ -131,13 +131,52 @@
 
 					modalEvento.show();
 				},
-				events:"api.php"  // url del archivo de la consulta de BD
+				eventClick:function(informacion){
+
+					//alert("Presionaste un Evento");
+					console.log(informacion);
+					modalEvento.show();
+					recuperarDatosEvento(informacion.event);
+
+				},events:"api.php"  // url del archivo de la consulta de BD
 			});
 			calendar.render();
 		});
 
 
+		function recuperarDatosEvento(evento){
+
+			let fecha = evento.startStr.split("T");
+			let hora = fecha[1].split("-");
+
+			document.getElementById('id').value = evento.id;
+			document.getElementById('titulo').value = evento.title;
+			document.getElementById('fecha').value = fecha[0];
+			document.getElementById('hora').value = hora[0];
+			document.getElementById('descripcion').value = evento.extendedProps.descripcion;
+			document.getElementById('color').value = evento.backgroundColor;
+		}
+
 		function agregarEvento(){
+			enviarDatosApi();
+		}
+
+
+		function enviarDatosApi(){
+			// recepcion de valores
+			fetch("api.php?accion=agregar", {
+				method: "POST",
+				body: recolectarDatos()
+			}).then(data => {
+				console.log(data); // captura los datos del POST
+				modalEvento.hide();  // cierra el modal
+			}).catch(error => {
+				console.log(error);
+			});
+		}
+
+
+		function recolectarDatos(){
 			let evento = new FormData();  /*POST de carga*/
 			evento.append("title", document.getElementById('titulo').value);
 			evento.append("fecha", document.getElementById('fecha').value);
@@ -146,20 +185,7 @@
 			evento.append("color", document.getElementById('color').value);
 			evento.append("id", document.getElementById('id').value);
 
-			/*console.log(evento.get("title"))*/
-			for (let valor of evento.values()) {
-				console.log(valor);
-			}
-
-			// recepcion de valores
-			fetch("api.php?accion=agregar", {
-				method: "POST",
-				body: evento
-			}).then(data => {
-				console.log(data);
-			}).catch(error => {
-				console.log(error);
-			});
+			return evento;
 		}
 
 
